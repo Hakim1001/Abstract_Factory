@@ -1,58 +1,56 @@
 #ifndef CLASSUNIT_H
 #define CLASSUNIT_H
-#include <iostream>
-#include <string>
-#include <unit.h>
-#include <vector>
 
-class ClassUnit : public Unit
+#include <methodunit.h>
+#include "unit.h"
+class ClassUnit:public Unit
 {
-public:
+
+
+public:                                                                                              // перечисление всех поддерживаемых модификаторов доступа всех поддерживаемых языков
 enum AccessModifier
 {
 PUBLIC,
 PROTECTED,
-PRIVATE
+PRIVATE,
+INTERNAL,
+PROTECTED_INTERNAL,
+PRIVATE_PROTECTED
 };
-static const std::vector< std::string > ACCESS_MODIFIERS;
-public:
-explicit ClassUnit( const std::string& name) : m_name( name )
-{
-m_fields.resize( ACCESS_MODIFIERS.size() );
-}
-  void add( const std::shared_ptr< Unit >& unit, Flags flags )
-{
-int accessModifier = PRIVATE;
-if( flags < ACCESS_MODIFIERS.size() )
-{
-accessModifier = flags;
-}
-m_fields[ accessModifier ].push_back( unit );
-}
-std::string compile( unsigned int level = 0 ) const
-{
-  std::string result = generateShift( level ) + "class " + m_name + " {\n";
-  for( size_t i = 0; i < ACCESS_MODIFIERS.size(); ++i )
-  {
-     if( m_fields[ i ].empty() )
-     {
-     continue;
-     }
-     result += ACCESS_MODIFIERS[ i ] + ":\n";
-     for( const auto& f : m_fields[ i ] )
-     {
-     result += f->compile( level + 1 );
-     }
-     result += "\n";
-   }
-   result += generateShift( level ) + "};\n";
-   return result;
-}
-protected:
-std::string m_name;
 
-using Fields = std::vector< std::shared_ptr< Unit > >;
-std::vector< Fields > m_fields;
+
+public:
+
+    public:
+        explicit ClassUnit(const std::string &name,size_t t): m_name(name),m_fields(t)               // передача базовому классу количества поддерживаемых модификаторов доступа
+        {
+        }
+
+void add( const std::shared_ptr<Unit>& unit, Flags flags )                     //Добавление методов и тела методов функций в класс
+{
+    if (unit == nullptr)
+    {
+        throw std::runtime_error("The unit is nullptr.");
+    }
+    size_t access_modifier = PRIVATE;
+    if (flags < m_fields.size())                                               // отсеивание модификаторов доступа, не поддерживающихся данным языком
+    {
+        access_modifier = flags;
+    }
+    if(flags > m_fields.size())
+    {
+       throw std::runtime_error( "Not supported" );
+    }
+  m_fields[access_modifier].push_back( unit );
+}
+
+    protected:
+    std::string m_name;                                            // имя класса
+    using Fields = std::vector< std::shared_ptr<Unit > >;          // тип данных для набора полей класса
+    std::vector< Fields > m_fields;                                // каждому модификатору доступа соотвествует свой набор полей
+
+
+
 };
 
 

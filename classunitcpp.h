@@ -1,21 +1,20 @@
 #ifndef CLASSUNITCPP_H
 #define CLASSUNITCPP_H
 #include <classunit.h>
-#include <unit.h>
+//#include <unit.h>
 class ClassUnitCpp: public ClassUnit
 {
-
 public:
     static const std::vector<std::string> ACCESS_MODIFIERS;                         // набор модификаторов доступа, поддерижваемых данным языком
 
 public:
-    explicit ClassUnitCpp(const std::string &name)
-        : ClassUnit(name)                                                           // передача базовому классу количества поддерживаемых модификаторов доступа
-    {
 
+  explicit  ClassUnitCpp(const std::string &name):ClassUnit(name, ACCESS_MODIFIERS.size())                                                        // передача базовому классу количества поддерживаемых модификаторов доступа
+    {
     }
 
-    void Add(std::shared_ptr<Unit> &unit, Flags flags)
+
+    void Add(const std::shared_ptr<Unit> &unit, Flags flags)
     {
         if (unit == nullptr)
         {
@@ -57,6 +56,8 @@ public:
         return result;
 
     }
+
+
 };
 const std::vector<std::string> ClassUnitCpp::ACCESS_MODIFIERS = { "public", "protected", "private" }; //поддерживаемые языком модификаторов доступа
 

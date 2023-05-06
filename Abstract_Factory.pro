@@ -11,24 +11,36 @@ CONFIG += c++11
 SOURCES += \
     classunit.cpp \
     classunitcpp.cpp \
+    classunitcsharp.cpp \
+    classunitjava.cpp \
     language_factory.cpp \
     main.cpp \
     mainwindow.cpp \
     methodunit.cpp \
-    methosunitcpp.cpp \
+    methodunitcpp.cpp \
+    methodunitcsharp.cpp \
+    methodunitjava.cpp \
     printoperator.cpp \
     printoperatorcpp.cpp \
+    printoperatorcsharp.cpp \
+    printoperatorjava.cpp \
     unit.cpp
 
 HEADERS += \
     classunit.h \
     classunitcpp.h \
+    classunitcsharp.h \
+    classunitjava.h \
     language_factory.h \
     mainwindow.h \
     methodunit.h \
-    methosunitcpp.h \
+    methodunitcpp.h \
+    methodunitcsharp.h \
+    methodunitjava.h \
     printoperator.h \
     printoperatorcpp.h \
+    printoperatorcsharp.h \
+    printoperatorjava.h \
     unit.h
 
 FORMS += \
