@@ -23,7 +23,10 @@ public:
         {
             result += "virtual ";
         }
-
+        if(m_flags & SEALED||m_flags & FINAL)
+       {
+            result += "sealed ";
+       }
         result += m_returnType + " ";
         result += m_name + "() {\n";
 

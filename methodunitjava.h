@@ -20,7 +20,7 @@ public:
         }
         // virtual в данном языке отсутствует
 
-        if (m_flags & FINAL) // но зато добавляется новый файл - final
+        if (m_flags & FINAL||m_flags & SEALED) // но зато добавляется новый файл - final
         {
             result += "final ";
         }

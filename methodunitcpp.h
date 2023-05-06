@@ -33,6 +33,7 @@ public:
       {
       result += " const";
       }
+
       result += " {\n";
       for( const auto& b : m_body )
       {

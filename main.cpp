@@ -9,8 +9,9 @@ std::string GenerateCode(const std::shared_ptr<Language_Factory> &factory)
     auto tmp=factory->CreateClass("ClassA");
     tmp->add(factory->CreateMethod("TestFunctPrivate","void",0), ClassUnit::PRIVATE);
     tmp->add(factory->CreateMethod("TestFunctPublic","void",0), ClassUnit::PUBLIC);
-    tmp->add(factory->CreateMethod("TestFunctInternal","void",0), ClassUnit::INTERNAL);
-    tmp->add(factory->CreateMethod("TestFunctProtected_internal","void",0), ClassUnit::PROTECTED_INTERNAL);
+//    tmp->add(factory->CreateMethod("TestFunctInternal","void",0), ClassUnit::INTERNAL);
+//    tmp->add(factory->CreateMethod("TestFunctProtected_internal","void",0), ClassUnit::PROTECTED_INTERNAL);
+//    tmp->add(factory->CreateMethod("TestFunctProtected_internal","void",0), ClassUnit::PRIVATE_PROTECTED);
     auto method_static=factory->CreateMethod("TestFucnt2","void",MethodUnit::STATIC);
     method_static->add(factory->CreatePrintOperator("Static Hello, world!"));
     tmp->add(method_static, ClassUnit::PROTECTED);
@@ -20,7 +21,7 @@ std::string GenerateCode(const std::shared_ptr<Language_Factory> &factory)
     auto method_const=factory->CreateMethod("TestFucnt2","void",MethodUnit::CONST);
     method_const->add(factory->CreatePrintOperator("Const Hello, world!"));
     tmp->add(method_const, ClassUnit::PROTECTED);
-    auto method_final=factory->CreateMethod("TestFucnt2","void",MethodUnit::FINAL);
+    auto method_final=factory->CreateMethod("TestFucnt2","void",MethodUnit::SEALED);
     method_final->add(factory->CreatePrintOperator("Final Hello, world!"));
     tmp->add(method_final, ClassUnit::PROTECTED);
     return tmp->compile();

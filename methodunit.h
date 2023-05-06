@@ -16,7 +16,8 @@ enum Modifier                                                // перечисл
 STATIC = 1,
 CONST = 1 << 1,
 VIRTUAL = 1 << 2,
-FINAL = 1 << 3
+FINAL = 1 << 3,
+SEALED = 1 << 4
 };
 
     public:
